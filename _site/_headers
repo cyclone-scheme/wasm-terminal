@@ -1,12 +1,5 @@
+# Netlify HTTP header file
+# Headers required to allow SharedArrayBuffer to work, which is required by WASM pthreads
 /*
   Cross-Origin-Embedder-Policy: require-corp
   Cross-Origin-Opener-Policy: same-origin
-## a path:
-#/templates/index.html
-#  # headers for that path:
-#  X-Frame-Options: DENY
-#  X-XSS-Protection: 1; mode=block
-## another path:
-#/templates/index2.html
-#  # headers for that path:
-#  X-Frame-Options: SAMEORIGIN
