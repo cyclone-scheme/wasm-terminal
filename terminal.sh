@@ -1,23 +1,27 @@
 #!/bin/bash
-/home/justin/Documents/emsdk/upstream/emscripten/emcc examples/wasm/terminal.c  -g4 -fPIC -Wall -Wno-shift-negative-value -Wno-unused-command-line-argument -Iinclude -c -o terminal.o
 
-/home/justin/Documents/emsdk/upstream/emscripten/emcc terminal.o scheme/base.o scheme/write.o scheme/cyclone/common.o \
-  scheme/file.o \
-  scheme/char.o \
-  srfi/18.o \
-  srfi/69.o \
-  scheme/cyclone/hashset.o \
-  scheme/cyclone/primitives.o \
-  scheme/process-context.o \
-  scheme/read.o \
-  scheme/cyclone/util.o \
-  scheme/cyclone/libraries.o \
-  scheme/eval.o \
-  scheme/repl.o \
- -g -pthread -lcyclone -lm -lcyclonebn -ldl -L.  -o terminal.html \
+CYC_DIR="../cyclone-bootstrap"
+source ~/Documents/emsdk/emsdk_env.sh
+emcc terminal.c  -g4 -fPIC -Wall -Wno-shift-negative-value -Wno-unused-command-line-argument -I$CYC_DIR/include -c -o terminal.o
+
+emcc terminal.o \
+  $CYC_DIR/scheme/base.o \
+  $CYC_DIR/scheme/write.o \
+  $CYC_DIR/scheme/cyclone/common.o \
+  $CYC_DIR/scheme/file.o \
+  $CYC_DIR/scheme/char.o \
+  $CYC_DIR/srfi/18.o \
+  $CYC_DIR/srfi/69.o \
+  $CYC_DIR/scheme/cyclone/hashset.o \
+  $CYC_DIR/scheme/cyclone/primitives.o \
+  $CYC_DIR/scheme/process-context.o \
+  $CYC_DIR/scheme/read.o \
+  $CYC_DIR/scheme/cyclone/util.o \
+  $CYC_DIR/scheme/cyclone/libraries.o \
+  $CYC_DIR/scheme/eval.o \
+  $CYC_DIR/scheme/repl.o \
+ -g -pthread -lcyclone -lm -lcyclonebn -ldl -L$CYC_DIR  -o terminal.html \
  -s USE_PTHREADS=1 -s WASM=1 -s INITIAL_MEMORY=33554432 -s PROXY_TO_PTHREAD --source-map-base http://localhost/cyclone-bootstrap/ \
  -s ASSERTIONS=2 -s SAFE_HEAP=1 -s STACK_OVERFLOW_CHECK=1 \
  -s "EXTRA_EXPORTED_RUNTIME_METHODS=['ccall', 'cwrap']"
-
-#/home/justin/Documents/emsdk/upstream/emscripten/emcc terminal.o scheme/base.o scheme/write.o scheme/cyclone/common.o -g4 -pthread -lcyclone -lm -lcyclonebn -ldl -L.  -Wl,--export-dynamic -o terminal.html -s USE_PTHREADS=1 -s WASM=1 -s INITIAL_MEMORY=33554432 -s PROXY_TO_PTHREAD --source-map-base http://localhost/cyclone-bootstrap/
 
