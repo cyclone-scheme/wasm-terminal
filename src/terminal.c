@@ -1260,7 +1260,7 @@ c_73187.elements = (object *)e_73190;
 c_73187.elements[0] = ((closureN)self_73120)->elements[0];
 
 
-make_double(c_73191, 0.5);
+make_double(c_73191, 0.1);
 return_closcall2(data,  __glo_thread_91sleep_67_srfi_18,  &c_73187, &c_73191);; 
 }
 

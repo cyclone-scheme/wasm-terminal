@@ -49,7 +49,7 @@
               (newline)))
           sexp-lis)
         (close-port fp))))
-  (thread-sleep! 0.5)
+  (thread-sleep! 0.1)
   (loop)))
 
 (loop)
