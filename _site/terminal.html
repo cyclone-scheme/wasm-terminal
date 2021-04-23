@@ -113,9 +113,8 @@
     </style>
   </head>
   <body>
-    <br />
-    <br />
     <div id="term"></div>
+    <br />
 <!--
     <div class="spinner" id='spinner'></div>
     <div class="emscripten" id="status">Downloading...</div>
@@ -250,16 +249,38 @@
       }
 
       var termOpts = {
-        height: 400,
-        prompt: 'cyclone> ',
-        greetings: '',
+        prompt: '> ',
+        greetings: "\n" +
+"              :@ \n" +
+"            @@@  \n" +
+"          @@@@:  \n" +
+"        `@@@@@+  \n" +
+"       .@@@+@@@ \n" +
+"       @@     @@     Cyclone Scheme->C compiler \n" +
+"      ,@             http://justinethier.github.io/cyclone/ \n" +
+"      '@        \n" +
+"      .@             (c) 2014-2021 Justin Ethier \n" +
+"       @@     #@     \n" +
+"       `@@@#@@@.\n" +
+"        #@@@@@   \n" +
+"        +@@@+    \n" +
+"        @@#      \n" +
+"      `@.  \n" +
+"     ",
         onClear: function(term){
           term.echo(this.greetings);
         }
       };
+
       jQuery(document).ready(function($) {
         term = $('#term').terminal(interpret, termOpts);
         //$.terminal.syntax('scheme');
+
+        // Handle fullscreen properly
+        var $win = $(window)
+        $win.resize(function() {
+            term.height($win.height()-20);
+        }).resize();
       });
     </script>
     <script async type="text/javascript" src="terminal.js"></script>
