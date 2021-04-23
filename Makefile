@@ -24,7 +24,14 @@ all:
 	 -s USE_PTHREADS=1 -s WASM=1 -s INITIAL_MEMORY=33554432 -s PROXY_TO_PTHREAD --source-map-base http://localhost/cyclone-bootstrap/ \
 	 -s ASSERTIONS=2 -s SAFE_HEAP=1 -s STACK_OVERFLOW_CHECK=1 \
 	 -s "EXTRA_EXPORTED_RUNTIME_METHODS=['ccall', 'cwrap']"
+	cp terminal.wasm _site
+	cp terminal.js _site
 
-.PHONY: clean
+.PHONY: clean dist
+
+# Deploy locally
+dist:
+	cp _site/* /var/www/html/terminal/
+
 clean: 
 	git clean -fdx
