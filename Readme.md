@@ -1,4 +1,2 @@
-This project is a basic Cyclone Scheme REPL compiled to web assembly.
-
-Available online at:
+A basic Cyclone Scheme REPL compiled to web assembly:
 https://cyclone-scheme.netlify.app/terminal.html
