@@ -21,7 +21,7 @@ all:
 	  $(CYC_DIR)/scheme/eval.o \
 	  $(CYC_DIR)/scheme/repl.o \
 	 -g -pthread -lcyclone -lm -lcyclonebn -ldl -L$(CYC_DIR)  -o terminal.html \
-	 -s USE_PTHREADS=1 -s WASM=1 -s INITIAL_MEMORY=33554432 -s PROXY_TO_PTHREAD --source-map-base http://localhost/cyclone-bootstrap/ \
+	 -s USE_PTHREADS=1 -s WASM=1 -s INITIAL_MEMORY=33554432 -s PROXY_TO_PTHREAD --source-map-base https://cyclone-scheme.netlify.app/ \
 	 -s ASSERTIONS=2 -s SAFE_HEAP=1 -s STACK_OVERFLOW_CHECK=1 \
 	 -s "EXTRA_EXPORTED_RUNTIME_METHODS=['ccall', 'cwrap']"
 	cp terminal.wasm _site
