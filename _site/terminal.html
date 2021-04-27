@@ -12,6 +12,7 @@
     <script src="jquery-3.3.1.min.js"></script>
     <script src="jquery.terminal.min.js"></script>
     <script src="prism.js"></script>
+    <script src="prism-patch.js"></script>
     <script src="prism-scheme.min.js"></script>
     <link rel="stylesheet" href="jquery.terminal.min.css"/>
     <link rel="stylesheet" href="prism.css"/>
@@ -260,7 +261,7 @@
 "       .@@@+@@@ \n" +
 "       @@     @@     Cyclone Scheme->C compiler \n" +
 "      ,@             http://justinethier.github.io/cyclone/ \n" +
-"      '@        \n" +
+"       @        \n" +
 "      .@             (c) 2014-2021 Justin Ethier \n" +
 "       @@     #@     \n" +
 "       `@@@#@@@.\n" +
@@ -276,7 +277,7 @@
 
       jQuery(document).ready(function($) {
         term = $('#term').terminal(interpret, termOpts);
-        //$.terminal.syntax('scheme');
+        $.terminal.syntax('scheme');
 
         // Handle fullscreen properly
         var $win = $(window)
