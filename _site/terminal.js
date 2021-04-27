@@ -1859,6 +1859,8 @@ var PThread = {
   };
   worker.onerror = function(e) {
    err("pthread sent an error! " + e.filename + ":" + e.lineno + ": " + e.message);
+   term.freeze(true);
+   term.set_prompt('');
   };
   if (ENVIRONMENT_IS_NODE) {
    worker.on("message", function(data) {
