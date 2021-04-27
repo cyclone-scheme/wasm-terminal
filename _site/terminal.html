@@ -230,6 +230,8 @@
 
       Module['onRuntimeInitialized'] = function() {
         isReady = true;
+        term.set_prompt('> ');
+        term.freeze(false);
       }
 
       function interpret(command, term) {
@@ -249,7 +251,7 @@
       }
 
       var termOpts = {
-        prompt: '> ',
+        prompt: 'Loading... ',
         greetings: "\n" +
 "              :@ \n" +
 "            @@@  \n" +
@@ -281,6 +283,7 @@
         $win.resize(function() {
             term.height($win.height()-20);
         }).resize();
+        term.freeze(true);
       });
     </script>
     <script async type="text/javascript" src="terminal.js"></script>
