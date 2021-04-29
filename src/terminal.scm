@@ -20,6 +20,13 @@
       return_closcall1(data, k, boolean_f);
     } ")
 
+(define-c ready-for-more-input
+  "(void *data, object _, int argc, object *args)"
+  " object k = args[0]; 
+    emscripten_run_script(\"readyForNextCommand()\");
+    return_closcall1(data, k, boolean_f);
+    ")
+
 (define (loop)
   (with-handler                                                              
     (lambda (obj)                                                            
@@ -59,7 +66,8 @@
               (write obj)
               (newline)))
           sexp-lis)
-        (close-port fp))))
+        (close-port fp))
+      (ready-for-more-input)))
   (thread-sleep! 0.1)
   (loop)))
 
