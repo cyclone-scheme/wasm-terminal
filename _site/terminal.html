@@ -242,9 +242,16 @@
           if(command != '') {
             var txt = command;
             Module.ccall('sendToEval', null, ['string'], [txt]);
-            term.freeze(true); // Block until we get a response
+            // TODO: re-enable this once the other side is working
+            //term.set_prompt('');
+            //term.freeze(true); // Block until we get a response
           }
         }
+      }
+
+      function readyForNextCommand() {
+        term.set_prompt('> ');
+        term.freeze(false);
       }
 
       //function sendToWasm(){
