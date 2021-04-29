@@ -5,9 +5,20 @@
         (srfi 18))
 
 (define-c get-input
-  "(void *data, int argc, closure _, object k)"
-  " make_utf8_string(data, str, \"(+ 1 2 3) \\\"test\\\" (* 3 5 7)\");
-    return_closcall1(data, k, &str);")
+  "(void *data, object _, int argc, object *args)"
+  " object k = args[0]; 
+    /* TODO: use mutex to lock glo_sexp */
+    char *s = glo_sexp;
+    glo_sexp = NULL;
+    /* TODO: unlock */
+  
+    if (s != NULL) {
+      make_utf8_string(data, str, s);
+      free(s);
+      return_closcall1(data, k, &str); 
+    } else {
+      return_closcall1(data, k, boolean_f);
+    } ")
 
 (define (loop)
   (with-handler                                                              
