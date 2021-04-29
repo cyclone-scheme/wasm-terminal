@@ -242,14 +242,15 @@
           if(command != '') {
             var txt = command;
             Module.ccall('sendToEval', null, ['string'], [txt]);
+            term.freeze(true); // Block until we get a response
           }
         }
       }
 
-      function sendToWasm(){
-        var txt = document.getElementById("input").value;
-        Module.ccall('sendToEval', null, ['string'], [txt]);
-      }
+      //function sendToWasm(){
+      //  var txt = document.getElementById("input").value;
+      //  Module.ccall('sendToEval', null, ['string'], [txt]);
+      //}
 
       var termOpts = {
         prompt: 'Loading... ',
