@@ -27,6 +27,7 @@ all:
 	 -s "EXTRA_EXPORTED_RUNTIME_METHODS=['ccall', 'cwrap']"
 	cp terminal.wasm _site
 	cp terminal.js _site
+	cp terminal.worker.js _site
 
 .PHONY: clean dist
 
