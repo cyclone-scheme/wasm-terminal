@@ -48,6 +48,13 @@
     return_closcall1(data, k, boolean_f);
   ")
 
+(define-c help
+  "(void *data, object _, int argc, object *args)"
+  " object k = args[0]; 
+    printf(\"See: http://justinethier.github.io/cyclone/docs/API \\n\");
+    return_closcall1(data, k, boolean_f);
+  ")
+
 (define (loop)
   (with-handler                                                              
     (lambda (obj)                                                            
