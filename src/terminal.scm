@@ -3,24 +3,25 @@
         (scheme write) 
         (scheme eval) 
         (srfi 18)
-        (cyclone foreign))
+        ;(cyclone foreign)
+        )
 
 (include-c-header "<emscripten.h>")
 
-(c-code
-"
-char *glo_sexp = NULL;
-
-EMSCRIPTEN_KEEPALIVE
-void sendToEval(char *sexp) {
-  char *d = malloc(strlen(sexp) + 1);
-  if (d) {
-    strcpy(d, sexp);
-  }
-// TODO: use mutex to lock glo_sexp
-  glo_sexp = d;
-// TODO: unlock
-} ")
+;(c-code
+;"
+;char *glo_sexp = NULL;
+;
+;EMSCRIPTEN_KEEPALIVE
+;void sendToEval(char *sexp) {
+;  char *d = malloc(strlen(sexp) + 1);
+;  if (d) {
+;    strcpy(d, sexp);
+;  }
+;// TODO: use mutex to lock glo_sexp
+;  glo_sexp = d;
+;// TODO: unlock
+;} ")
 
 (define-c get-input
   "(void *data, object _, int argc, object *args)"
@@ -41,9 +42,11 @@ void sendToEval(char *sexp) {
 (define-c ready-for-more-input
   "(void *data, object _, int argc, object *args)"
   " object k = args[0]; 
-    emscripten_run_script(\"readyForNextCommand()\");
+    MAIN_THREAD_ASYNC_EM_ASM(
+      readyForNextCommand();
+    );
     return_closcall1(data, k, boolean_f);
-    ")
+  ")
 
 (define (loop)
   (with-handler                                                              
@@ -73,6 +76,7 @@ void sendToEval(char *sexp) {
         (else                                                                
           (display obj)))                                                    
       (newline)                                                              
+      (ready-for-more-input)
       (loop))
   (let ((str (get-input)))
     (when str

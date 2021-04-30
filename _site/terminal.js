@@ -1464,10 +1464,13 @@ var tempDouble;
 var tempI64;
 
 var ASM_CONSTS = {
- 78696: function() {
+ 1157: function() {
+  readyForNextCommand();
+ },
+ 76712: function() {
   throw "Canceled!";
  },
- 78946: function($0, $1) {
+ 76962: function($0, $1) {
   setTimeout(function() {
    __emscripten_do_dispatch_to_thread($0, $1);
   }, 0);
@@ -4756,6 +4759,18 @@ function _dlsym(handle, symbol) {
  abort("To use dlopen, you need to use Emscripten's linking support, see https://github.com/emscripten-core/emscripten/wiki/Linking");
 }
 
+function mainThreadEM_ASM(code, sigPtr, argbuf, sync) {
+ var args = readAsmConstArgs(sigPtr, argbuf);
+ if (ENVIRONMENT_IS_PTHREAD) {
+  return _emscripten_proxy_to_main_thread_js.apply(null, [ -1 - code, sync ].concat(args));
+ }
+ return ASM_CONSTS[code].apply(null, args);
+}
+
+function _emscripten_asm_const_async_on_main_thread(code, sigPtr, argbuf) {
+ return mainThreadEM_ASM(code, sigPtr, argbuf, 0);
+}
+
 function _emscripten_asm_const_int(code, sigPtr, argbuf) {
  var args = readAsmConstArgs(sigPtr, argbuf);
  return ASM_CONSTS[code].apply(null, args);
@@ -5775,6 +5790,7 @@ var asmLibraryArg = {
  "dlerror": _dlerror,
  "dlopen": _dlopen,
  "dlsym": _dlsym,
+ "emscripten_asm_const_async_on_main_thread": _emscripten_asm_const_async_on_main_thread,
  "emscripten_asm_const_int": _emscripten_asm_const_int,
  "emscripten_check_blocking_allowed": _emscripten_check_blocking_allowed,
  "emscripten_conditional_set_current_thread_status": _emscripten_conditional_set_current_thread_status,
@@ -5898,7 +5914,7 @@ var _emscripten_get_sbrk_ptr = Module["_emscripten_get_sbrk_ptr"] = createExport
 
 var dynCall_jiji = Module["dynCall_jiji"] = createExportWrapper("dynCall_jiji");
 
-var __emscripten_main_thread_futex = Module["__emscripten_main_thread_futex"] = 98228;
+var __emscripten_main_thread_futex = Module["__emscripten_main_thread_futex"] = 96004;
 
 function invoke_viiii(index, a1, a2, a3, a4) {
  var sp = stackSave();
