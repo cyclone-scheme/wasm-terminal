@@ -6,7 +6,10 @@
         ;(cyclone foreign)
         )
 
+;(include-c-header "cyclone/types.h")
 (include-c-header "<emscripten.h>")
+(include-c-header "ck-polyfill.h")
+(include-c-header "terminal.h")
 
 ;(c-code
 ;"
