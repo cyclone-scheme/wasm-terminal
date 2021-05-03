@@ -162,6 +162,7 @@ if (obj_is_not_closure(clo)) { \
 
 #include <emscripten.h>
 #include "ck-polyfill.h"
+#include "terminal.h"
 #include "cyclone/types.h"
 object __glo_loop = NULL;
 object __glo_help = NULL;
@@ -509,20 +510,6 @@ static void __lambda_2(void *data, object clo, int argc, object *args) ;/*object
 static void __lambda_52(void *data, object clo, int argc, object *args) ;/*(void *data, object _, int argc, object *args)*/
 static void __lambda_51(void *data, object clo, int argc, object *args) ;/*(void *data, object _, int argc, object *args)*/
 static void __lambda_50(void *data, object clo, int argc, object *args) ;/*(void *data, object _, int argc, object *args)*/
-
-char *glo_sexp = NULL;
-
-EMSCRIPTEN_KEEPALIVE
-void sendToEval(char *sexp) {
-  char *d = malloc(strlen(sexp) + 1);
-  if (d) {
-    strcpy(d, sexp);
-  }
-// TODO: use mutex to lock glo_sexp
-  glo_sexp = d;
-// TODO: unlock
-} 
-
 
 static void __lambda_48(void *data, object self_73135, int argc, object *args) /* object self_73135, object r_7387 */
  {
@@ -1530,7 +1517,7 @@ int main(int argc, char **argv, char **envp)
 {gc_thread_data *thd;
  long stack_size = global_stack_size = STACK_SIZE;
  long heap_size = global_heap_size = HEAP_SIZE;
- ck_polyfill_init();
+ init_polyfills();
  mclosure0(clos_halt,&Cyc_halt);  // Halt if final closure is reached
  mclosure0(entry_pt,&c_entry_pt); // First function to execute
  _cyc_argc = argc;
