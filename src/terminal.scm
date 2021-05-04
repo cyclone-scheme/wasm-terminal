@@ -2,29 +2,37 @@
         (scheme read) 
         (scheme write) 
         (scheme eval) 
-        (srfi 18)
-        ;(cyclone foreign)
-        )
+        (srfi 18))
 
 ;(include-c-header "cyclone/types.h")
 (include-c-header "<emscripten.h>")
 (include-c-header "ck-polyfill.h")
 (include-c-header "terminal.h")
 
-;(c-code
-;"
-;char *glo_sexp = NULL;
-;
-;EMSCRIPTEN_KEEPALIVE
-;void sendToEval(char *sexp) {
-;  char *d = malloc(strlen(sexp) + 1);
-;  if (d) {
-;    strcpy(d, sexp);
-;  }
-;// TODO: use mutex to lock glo_sexp
-;  glo_sexp = d;
-;// TODO: unlock
-;} ")
+(define *site-url* "http://justinethier.github.io/cyclone")
+(define (help . opts)
+  (cond
+    (else
+      (display (string-append "
+Type (help) to see this menu.
+Type (help object) to find API documentation for object
+
+Cyclone Links
+Main website: " *site-url* "
+User Manual: " *site-url* "/docs/User-Manual
+API Documentation: " *site-url* "/docs/API
+Bug Reports: https://github.com/justinethier/cyclone/issues
+
+Other Resources
+R7RS Scheme Language Specification: " *site-url* "/docs/r7rs.pdf
+
+")))))
+
+;(define-c help2
+;  "(void *data, object _, int argc, object *args)"
+;  " object k = args[0]; 
+;    __glo_help(data, NULL, argc, args);
+;  ")
 
 (define-c get-input
   "(void *data, object _, int argc, object *args)"
@@ -48,13 +56,6 @@
     MAIN_THREAD_ASYNC_EM_ASM(
       readyForNextCommand();
     );
-    return_closcall1(data, k, boolean_f);
-  ")
-
-(define-c help
-  "(void *data, object _, int argc, object *args)"
-  " object k = args[0]; 
-    printf(\"See: http://justinethier.github.io/cyclone/docs/API \\n\");
     return_closcall1(data, k, boolean_f);
   ")
 
@@ -103,5 +104,6 @@
   (thread-sleep! 0.1)
   (loop)))
 
+(help)
 (loop)
 
