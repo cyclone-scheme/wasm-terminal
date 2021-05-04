@@ -17,11 +17,12 @@
 Type (help) to see this menu.
 Type (help object) to find API documentation for object
 
-Cyclone Links
-Main website: " *site-url* "
+Cyclone
+Website: " *site-url* "
 User Manual: " *site-url* "/docs/User-Manual
 API Documentation: " *site-url* "/docs/API
-Bug Reports: https://github.com/justinethier/cyclone/issues
+Forum: https://github.com/justinethier/cyclone/discussions
+Report a Bug: https://github.com/justinethier/cyclone/issues
 
 Other Resources
 R7RS Scheme Language Specification: " *site-url* "/docs/r7rs.pdf
