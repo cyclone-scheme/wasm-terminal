@@ -10,8 +10,38 @@
 (include-c-header "terminal.h")
 
 (define *site-url* "http://justinethier.github.io/cyclone")
-(define (help . opts)
+
+(define *api-index* 
+  `(
+    (when . "api/scheme/base#when")
+    (with-exception-handler . "api/scheme/base#with-exception-handler")
+    (with-handler . "api/scheme/base#with-handler")
+    (write-char . "api/scheme/base#write-char")
+    (write-shared . "api/scheme/write#write-shared")
+    (write-simple . "api/scheme/write#write-simple")
+    (write-string . "api/scheme/base#write-string")
+    (write . "api/scheme/write#write")))
+
+ (define-syntax help
+   (er-macro-transformer
+    (lambda (expr rename compare)
+      (let ((args (length expr)))
+        (if (= args 1)
+            `(%help)
+            `(%help (quote ,(cadr expr))))))))
+
+(define (%help . opts)
   (cond
+    ((pair? opts)
+     (let* ((var (car opts))
+            (link (assoc var *api-index*)))
+       (cond
+        ((pair? link)
+         (display (string-append *site-url* "/docs/" (cdr link)))
+         (newline))
+        (else
+         (display "No help found")
+         (newline)))))
     (else
       (display (string-append "
 Type (help) to see this menu.
@@ -28,12 +58,6 @@ Other Resources
 R7RS Scheme Language Specification: " *site-url* "/docs/r7rs.pdf
 
 ")))))
-
-;(define-c help2
-;  "(void *data, object _, int argc, object *args)"
-;  " object k = args[0]; 
-;    __glo_help(data, NULL, argc, args);
-;  ")
 
 (define-c get-input
   "(void *data, object _, int argc, object *args)"
