@@ -231,10 +231,9 @@
 
       Module['onRuntimeInitialized'] = function() {
         isReady = true;
-        // Remove this, will re-enable after (help)
-        //// Allow for input once we are ready
-        //term.set_prompt('> ');
-        //term.freeze(false);
+        // Allow for input once we are ready
+        term.set_prompt('> ');
+        term.freeze(false);
       }
 
       function interpret(command, term) {
