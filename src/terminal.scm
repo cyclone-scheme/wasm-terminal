@@ -13,14 +13,14 @@
 
 (define *api-index* 
   `(
-;    (when . "api/scheme/base#when")
-;    (with-exception-handler . "api/scheme/base#with-exception-handler")
-;    (with-handler . "api/scheme/base#with-handler")
-;    (write-char . "api/scheme/base#write-char")
-;    (write-shared . "api/scheme/write#write-shared")
-;    (write-simple . "api/scheme/write#write-simple")
-;    (write-string . "api/scheme/base#write-string")
-;    (write . "api/scheme/write#write")))
+    (when . "api/scheme/base#when")
+    (with-exception-handler . "api/scheme/base#with-exception-handler")
+    (with-handler . "api/scheme/base#with-handler")
+    (write-char . "api/scheme/base#write-char")
+    (write-shared . "api/scheme/write#write-shared")
+    (write-simple . "api/scheme/write#write-simple")
+    (write-string . "api/scheme/base#write-string")
+    (write . "api/scheme/write#write")))
 
 ;[`*Cyc-version-banner*`](api/scheme/cyclone/common#cyc-version-banner)
 ;[`*`](api/primitives#section)
@@ -1315,5 +1315,6 @@ R7RS Scheme Language Specification: " *site-url* "/docs/r7rs.pdf
   (loop)))
 
 (help)
+(ready-for-more-input)
 (loop)
 
