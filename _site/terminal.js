@@ -1464,13 +1464,16 @@ var tempDouble;
 var tempI64;
 
 var ASM_CONSTS = {
- 1404: function() {
+ 1325: function($0) {
+  helpLink(UTF8ToString($0));
+ },
+ 1357: function() {
   readyForNextCommand();
  },
- 77608: function() {
+ 77320: function() {
   throw "Canceled!";
  },
- 77858: function($0, $1) {
+ 77570: function($0, $1) {
   setTimeout(function() {
    __emscripten_do_dispatch_to_thread($0, $1);
   }, 0);
@@ -5914,7 +5917,7 @@ var _emscripten_get_sbrk_ptr = Module["_emscripten_get_sbrk_ptr"] = createExport
 
 var dynCall_jiji = Module["dynCall_jiji"] = createExportWrapper("dynCall_jiji");
 
-var __emscripten_main_thread_futex = Module["__emscripten_main_thread_futex"] = 97012;
+var __emscripten_main_thread_futex = Module["__emscripten_main_thread_futex"] = 96676;
 
 function invoke_viiii(index, a1, a2, a3, a4) {
  var sp = stackSave();
