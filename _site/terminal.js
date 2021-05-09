@@ -1470,10 +1470,10 @@ var ASM_CONSTS = {
  1357: function() {
   readyForNextCommand();
  },
- 77320: function() {
+ 77304: function() {
   throw "Canceled!";
  },
- 77570: function($0, $1) {
+ 77554: function($0, $1) {
   setTimeout(function() {
    __emscripten_do_dispatch_to_thread($0, $1);
   }, 0);
@@ -5855,6 +5855,8 @@ var _realloc = Module["_realloc"] = createExportWrapper("realloc");
 
 var _emscripten_get_global_libc = Module["_emscripten_get_global_libc"] = createExportWrapper("emscripten_get_global_libc");
 
+var ___em_js__initPthreadsJS = Module["___em_js__initPthreadsJS"] = createExportWrapper("__em_js__initPthreadsJS");
+
 var ___emscripten_pthread_data_constructor = Module["___emscripten_pthread_data_constructor"] = createExportWrapper("__emscripten_pthread_data_constructor");
 
 var _emscripten_main_browser_thread_id = Module["_emscripten_main_browser_thread_id"] = createExportWrapper("emscripten_main_browser_thread_id");
@@ -5917,7 +5919,7 @@ var _emscripten_get_sbrk_ptr = Module["_emscripten_get_sbrk_ptr"] = createExport
 
 var dynCall_jiji = Module["dynCall_jiji"] = createExportWrapper("dynCall_jiji");
 
-var __emscripten_main_thread_futex = Module["__emscripten_main_thread_futex"] = 96676;
+var __emscripten_main_thread_futex = Module["__emscripten_main_thread_futex"] = 96660;
 
 function invoke_viiii(index, a1, a2, a3, a4) {
  var sp = stackSave();
