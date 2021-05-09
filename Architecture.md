@@ -4,7 +4,6 @@
 - [Technology](#technology)
 - [Files](#files)
 - [Build Environment](#build-environment)
-- [Introduction](#introduction)
 - [Data Flow](#data-flow)
   - [Eval](#eval)
   - [Context-Sensitive Help](#context-sensitive-help)
