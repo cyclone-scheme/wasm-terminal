@@ -1,6 +1,17 @@
+# `wasm-terminal` Architecture Documentation
+
+- [Introduction](#introduction)
+- [Technology](#technology)
+- [Files](#files)
+- [Build Environment](#build-environment)
+- [Introduction](#introduction)
+- [Data Flow](#data-flow)
+  - [Eval](#eval)
+  - [Context-Sensitive Help](#context-sensitive-help)
+
 # Introduction
 
-This file documents the high-level architecture for `wasm-terminal` a web based Read-Eval-Print-Loop (REPL) for Cyclone Scheme.
+This file documents the high-level architecture for a web based Cyclone Scheme Read-Eval-Print-Loop (REPL), `wasm-terminal`.
 
 # Technology
 
