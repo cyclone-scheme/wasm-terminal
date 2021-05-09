@@ -50,7 +50,7 @@ A web hook is in place to update the project on Netlify once changes are pushed 
 
 ## Context-Sensitive Help
 
-* Our Scheme `(help object)` function receives an request by the user for a specific identifier.
-* Scheme calls into `helpLink` in JavaScript to look up the identifier.
-* JavaScript looks up given identifier in a pre-computed mapping and displays the link. 
+* Our Scheme `(help object)` function receives a request by the user for a specific identifier.
+* Scheme calls into JavaScript function `helpLink` to look up the identifier.
+* JavaScript finds the identifier in a pre-computed mapping and displays the link. 
 

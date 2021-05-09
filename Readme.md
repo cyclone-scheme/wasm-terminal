@@ -1,5 +1,3 @@
-A basic Cyclone Scheme REPL compiled to Web Assembly:
+A basic Cyclone Scheme REPL compiled to Web Assembly: https://cyclone-scheme.netlify.app/terminal.html
 
-https://cyclone-scheme.netlify.app/terminal.html
-
-[Architecture Documentation](Architecture.md)
+We also provide [Architecture Documentation](Architecture.md).
