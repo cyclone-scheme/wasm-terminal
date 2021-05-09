@@ -39,12 +39,12 @@ A web hook is in place to update the project on Netlify once changes are pushed 
 
 ## Eval
 
-* Terminal is unlocked and receives input string from the user.
-* JavaScript passes the string to Scheme (WASM) via `sendToEval.
-* Terminal is locked. No more input is allowed during this time.
+* The JavaScript terminal receives an input string from the user.
+* JavaScript passes the string to Scheme (WASM) via `sendToEval`.
+* The terminal is locked. No more input is allowed during this time.
 * Scheme main loop picks up string via `get-input`, and:
   * Parses into a Scheme object by reading from a string port.
-  * Passes the object to `eval`. During this process any data written to `stdout` is redirected back to the JavaScript terminal via hooks.
+  * Passes the object to `eval` to execute the code. During this time any data written to `stdout` is redirected back to the JavaScript terminal via hooks.
   * After Scheme is done, `ready-for-more-input` is called to unlock the terminal.
   * Loop sleeps until more input is ready.
 
