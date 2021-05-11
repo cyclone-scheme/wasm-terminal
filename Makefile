@@ -3,7 +3,7 @@ CYC_DIR = "../cyclone-bootstrap"
 
 all:
 	source ~/Documents/emsdk/emsdk_env.sh
-	emcc src/terminal.c -fPIC -Wall -Wno-shift-negative-value -Wno-unused-command-line-argument -I$(CYC_DIR)/include -c -o terminal.o
+	emcc src/terminal.c -O2 -fPIC -Wall -Wno-shift-negative-value -Wno-unused-command-line-argument -I$(CYC_DIR)/include -c -o terminal.o
 	emcc terminal.o \
 	  $(CYC_DIR)/scheme/base.o \
 	  $(CYC_DIR)/scheme/write.o \
@@ -20,7 +20,7 @@ all:
 	  $(CYC_DIR)/scheme/cyclone/libraries.o \
 	  $(CYC_DIR)/scheme/eval.o \
 	  $(CYC_DIR)/scheme/repl.o \
-	 -pthread -lcyclone -lm -lcyclonebn -ldl -L$(CYC_DIR)  -o terminal.html \
+	 -O2 -pthread -lcyclone -lm -lcyclonebn -ldl -L$(CYC_DIR)  -o terminal.html \
 	 -s USE_PTHREADS=1 -s WASM=1 -s INITIAL_MEMORY=33554432 -s PROXY_TO_PTHREAD --source-map-base https://cyclone-scheme.netlify.app/ \
 	 -s ASSERTIONS=2 -s SAFE_HEAP=1 -s STACK_OVERFLOW_CHECK=1 \
 	 -s "EXTRA_EXPORTED_RUNTIME_METHODS=['ccall', 'cwrap']"
