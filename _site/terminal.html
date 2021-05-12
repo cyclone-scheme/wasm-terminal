@@ -251,6 +251,64 @@
       //  Module.ccall('sendToEval', null, ['string'], [txt]);
       //}
 
+// copy from LIPS source code
+var pre_parse_re = /("(?:\\[\S\s]|[^"])*"|\/(?! )[^\/\\]*(?:\\[\S\s][^\/\\]*)*\/[gimy]*(?=\s|\(|\)|$)|;.*)/g;
+var tokens_re = /("(?:\\[\S\s]|[^"])*"|\/(?! )[^\/\\]*(?:\\[\S\s][^\/\\]*)*\/[gimy]*(?=\s|\(|\)|$)|\(|\)|'|"(?:\\[\S\s]|[^"])+|(?:\\[\S\s]|[^"])*"|;.*|(?:[-+]?(?:(?:\.[0-9]+|[0-9]+\.[0-9]+)(?:[eE][-+]?[0-9]+)?)|[0-9]+\.)[0-9]|\.|,@|,|`|[^(\s)]+)/gim;
+// ----------------------------------------------------------------------
+function tokenize(str) {
+    var count = 0;
+    var offset = 0;
+    var tokens = [];
+    str.split(pre_parse_re).filter(Boolean).forEach(function(string) {
+        if (string.match(pre_parse_re)) {
+            if (!string.match(/^;/)) {
+                var col = (string.split(/\n/), [""]).pop().length;
+                tokens.push({
+                    token: string,
+                    col,
+                    offset: count + offset,
+                    line: offset
+                });
+                count += string.length;
+            }
+            offset += (string.match("\n") || []).length;
+            return;
+        }
+        string.split('\n').filter(Boolean).forEach(function(line, i) {
+            var col = 0;
+            line.split(tokens_re).filter(Boolean).forEach(function(token) {
+                var line = i + offset;
+                var result = {
+                    col,
+                    line,
+                    token,
+                    offset: count + line
+                };
+                col += token.length;
+                count += token.length;
+                tokens.push(result);
+            });
+        });
+    });
+    return tokens;
+}
+
+      function balance(code) {
+          // tokenize from previous example
+          var tokens = tokenize(code);
+          var count = 0;
+          var token;
+          var i = tokens.length;
+          while ((token = tokens[--i])) {
+              if (token.token === '(') {
+                  count++
+              } else if (token.token == ')') {
+                  count--;
+              }
+          }
+          return count;
+      }
+
       var termOpts = {
         prompt: 'Loading... ',
         greetings: "\n" +
@@ -273,6 +331,15 @@
         onClear: function(term){
           term.echo(this.greetings);
         }
+        //,keymap: {
+        //  ENTER: function(e, original) {
+        //      if (balance(this.get_command()) === 0) {
+        //          original();
+        //      } else {
+        //          this.insert('\n');
+        //      }
+        //  }     
+        //}
       };
 
       jQuery(document).ready(function($) {
