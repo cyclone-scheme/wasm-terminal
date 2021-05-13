@@ -1519,7 +1519,7 @@ c_73246.elements = (object *)e_73249;
 c_73246.elements[0] = k_7383;
 
 
-make_utf8_string_with_len(c_73253, "\nType (help) to see this menu.\nType (help object) to find API documentation for object\n\nCyclone\nWebsite: ", 105, 105);
+make_utf8_string_with_len(c_73253, "\nType (help) to see this menu.\nType (help object) to find API documentation for object.\nType Shift-Enter to enter multi-line input.\n\nCyclone\nWebsite: ", 150, 150);
 
 make_utf8_string_with_len(c_73254, "\nUser Manual: ", 14, 14);
 

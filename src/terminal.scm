@@ -27,7 +27,8 @@
     (else
       (display (string-append "
 Type (help) to see this menu.
-Type (help object) to find API documentation for object
+Type (help object) to find API documentation for object.
+Type Shift-Enter to enter multi-line input.
 
 Cyclone
 Website: " *site-url* "
