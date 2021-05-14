@@ -25,16 +25,14 @@
      (display-help-for-cmd (car opts))
      (void))
     (else
-      (display (string-append "
-Type (help) to see this menu.
+      (display (string-append
+"Type (help) to see this menu.
 Type (help object) to find API documentation for object.
 Type Shift-Enter to enter multi-line input.
 
 Cyclone
-Website: " *site-url* "
 User Manual: " *site-url* "/docs/User-Manual
 API Documentation: " *site-url* "/docs/API
-Forum: https://github.com/justinethier/cyclone/discussions
 Report a Bug: https://github.com/justinethier/cyclone/issues
 
 Other Resources
