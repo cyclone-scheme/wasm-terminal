@@ -15,14 +15,6 @@ on:
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  build-emsdk:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: mymindstorm/setup-emsdk@v9
-
-      - name: Verify
-        run: emcc -v
-
   # This workflow contains a single job called "build"
   build:
     # The type of runner that the job will run on
@@ -42,6 +34,11 @@ jobs:
         run: |
           echo Add other actions to build,
           echo test, and deploy your project.
+
+      - uses: mymindstorm/setup-emsdk@v9
+
+      - name: Verify emsdk
+        run: emcc -v
 
       - name: Clone bootstrap
         run: |
