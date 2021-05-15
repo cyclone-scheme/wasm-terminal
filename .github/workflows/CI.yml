@@ -46,8 +46,7 @@ jobs:
       - name: Clone bootstrap
         run: |
          git clone https://github.com/justinethier/cyclone-bootstrap.git
-         cd cyclone-bootstrap
-         ./build-wasm.sh
+         cd cyclone-bootstrap && emmake make -f Makefile-wasm polyfill && emmake make -f Makefile-wasm
 
       - name: build site
         run: make && tar -cf _site.tar _site && gzip _site.tar
