@@ -43,20 +43,20 @@ jobs:
           echo Add other actions to build,
           echo test, and deploy your project.
 
-     - name: Clone bootstrap
-       run: |
+      - name: Clone bootstrap
+        run: |
          git clone https://github.com/justinethier/cyclone-bootstrap.git
          cd cyclone-bootstrap
          ./build-wasm.sh
 
-     - name: build site
-       run: make && tar -cf _site.tar _site && gzip _site.tar
+      - name: build site
+        run: make && tar -cf _site.tar _site && gzip _site.tar
 
-     - name: upload site
-       uses: actions/upload-artifact@v1
-       with:
-         name: wasm-terminal zip
-         path: _site.tar.gz
+      - name: upload site
+        uses: actions/upload-artifact@v1
+        with:
+          name: wasm-terminal zip
+          path: _site.tar.gz
 
       #- name: Install libck
       #  run: sudo apt-get install libck-dev    
