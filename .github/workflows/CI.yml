@@ -15,6 +15,14 @@ on:
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
+  build-emsdk:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: mymindstorm/setup-emsdk@v9
+
+      - name: Verify
+        run: emcc -v
+
   # This workflow contains a single job called "build"
   build:
     # The type of runner that the job will run on
@@ -35,10 +43,25 @@ jobs:
           echo Add other actions to build,
           echo test, and deploy your project.
 
-  build-emsdk:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: mymindstorm/setup-emsdk@v9
+     - name: Clone bootstrap
+       run: |
+         git clone https://github.com/justinethier/cyclone-bootstrap.git
+         cd cyclone-bootstrap
+         ./build-wasm.sh
 
-      - name: Verify
-        run: emcc -v
+     - name: build site
+       run: make && tar -cf _site.tar _site && gzip _site.tar
+
+     - name: upload site
+       uses: actions/upload-artifact@v1
+       with:
+         name: wasm-terminal zip
+         path: _site.tar.gz
+
+      #- name: Install libck
+      #  run: sudo apt-get install libck-dev    
+      #- name: Install Cyclone
+      #  run: |
+      #    wget https://github.com/cyclone-scheme/binary-releases/raw/master/ubuntu-18.04-lts/cyclone-scheme_0.28.0_amd64.deb 
+      #    sudo apt install ./cyclone-scheme_0.28.0_amd64.deb
+
