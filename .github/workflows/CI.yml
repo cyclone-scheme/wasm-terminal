@@ -47,7 +47,9 @@ jobs:
 
       - name: build site
         run: |
-         cp cyclone-bootstrap/ck-polyfill.h cyclone-bootstrap/include
+         cp ../cyclone-bootstrap/ck-polyfill.h ../cyclone-bootstrap/include/ck-polyfill.h
+         ls -l
+         ls -l ..
          make && tar -cf _site.tar _site && gzip _site.tar
 
       - name: upload site
