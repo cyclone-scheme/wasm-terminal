@@ -43,11 +43,12 @@ jobs:
       - name: Clone bootstrap
         run: |
          git clone https://github.com/justinethier/cyclone-bootstrap.git
-         cp cyclone-bootstrap/ck-polyfill.h cyclone-bootstrap/include
          cd cyclone-bootstrap && emmake make -f Makefile-wasm polyfill && emmake make -f Makefile-wasm
 
       - name: build site
-        run: make && tar -cf _site.tar _site && gzip _site.tar
+        run: |
+         cp cyclone-bootstrap/ck-polyfill.h cyclone-bootstrap/include
+         make && tar -cf _site.tar _site && gzip _site.tar
 
       - name: upload site
         uses: actions/upload-artifact@v1
