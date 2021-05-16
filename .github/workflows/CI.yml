@@ -43,6 +43,7 @@ jobs:
       - name: Clone bootstrap
         run: |
          git clone https://github.com/justinethier/cyclone-bootstrap.git
+         cp cyclone-bootstrap/ck-polyfill.h cyclone-bootstrap/include
          cd cyclone-bootstrap && emmake make -f Makefile-wasm polyfill && emmake make -f Makefile-wasm
 
       - name: build site
