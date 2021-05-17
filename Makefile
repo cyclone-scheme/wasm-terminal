@@ -3,7 +3,7 @@ CYC_DIR = "../cyclone-bootstrap"
 
 #	source ~/Documents/emsdk/emsdk_env.sh
 all:
-	emcc src/terminal.c -O2 -fPIC -Wall -Wno-shift-negative-value -Wno-unused-command-line-argument -I$(CYC_DIR)/include -c -o terminal.o
+	emcc src/terminal.c -O2 -Wall -Wno-shift-negative-value -Wno-unused-command-line-argument -I$(CYC_DIR)/include -c -o terminal.o
 	emcc terminal.o \
 	  $(CYC_DIR)/scheme/base.o \
 	  $(CYC_DIR)/scheme/write.o \
