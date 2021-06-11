@@ -383,7 +383,7 @@ function tokenize(str) {
                 const module = new WebAssembly.Module(Uint8Array.of(0x0, 0x61, 0x73, 0x6d, 0x01, 0x00, 0x00, 0x00));
                 var wasmMemory=new WebAssembly.Memory({"initial":128,"maximum":128,"shared":true});
                 if (module instanceof WebAssembly.Module &&
-                    wasmMemory instanceof WebAssembly.Memory) {
+                    wasmMemory.buffer instanceof SharedArrayBuffer) {
                     return new WebAssembly.Instance(module) instanceof WebAssembly.Instance;
                 }
             }
