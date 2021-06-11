@@ -354,7 +354,12 @@ function tokenize(str) {
         term.freeze(true);
 
         if (!wasmSupported()) {
-          term.echo("No WebAssembly support unable to run interpreter");
+          term.set_prompt('');
+          term.echo("Error: No WebAssembly support unable to run interpreter");
+        }
+        if (!wasmSabSupported()) {
+          term.set_prompt('');
+          term.echo("Error: No WebAssembly SharedArrayBuffer support unable to run interpreter");
         }
       });
     </script>
@@ -377,6 +382,20 @@ function tokenize(str) {
 
       // From: https://stackoverflow.com/a/47880734
       function wasmSupported() {
+        try {
+            if (typeof WebAssembly === "object"
+                && typeof WebAssembly.instantiate === "function") {
+                const module = new WebAssembly.Module(Uint8Array.of(0x0, 0x61, 0x73, 0x6d, 0x01, 0x00, 0x00, 0x00));
+                if (module instanceof WebAssembly.Module) {
+                    return new WebAssembly.Instance(module) instanceof WebAssembly.Instance;
+                }
+            }
+        } catch (e) {
+        }
+        return false;
+      }
+
+      function wasmSabSupported() {
         try {
             if (typeof WebAssembly === "object"
                 && typeof WebAssembly.instantiate === "function") {
