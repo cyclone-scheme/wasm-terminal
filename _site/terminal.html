@@ -353,7 +353,7 @@ function tokenize(str) {
         }).resize();
         term.freeze(true);
 
-        if (!wasmSupported()) {
+        if (true){ //!wasmSupported()) {
           term.echo("No WebAssembly support unable to run interpreter");
         }
       });
