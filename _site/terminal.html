@@ -355,11 +355,12 @@ function tokenize(str) {
 
         if (!wasmSupported()) {
           term.set_prompt('');
-          term.echo("Error: No WebAssembly support unable to run interpreter");
+          term.echo("Unable to run interpreter because the browser does not support WebAssembly");
         }
         if (!wasmSabSupported()) {
           term.set_prompt('');
-          term.echo("Error: No WebAssembly SharedArrayBuffer support unable to run interpreter");
+          term.echo("Unable to run interpreter because the browser does not support WebAssembly SharedArrayBuffer");
+          term.echo("For more information see https://caniuse.com/sharedarraybuffer");
         }
       });
     </script>
