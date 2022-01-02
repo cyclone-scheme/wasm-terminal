@@ -1887,7 +1887,9 @@ var PThread = {
    PThread.currentProxiedOperationCallerThread = undefined;
   };
   worker.onerror = function(e) {
-   err("pthread sent an error! " + e.filename + ":" + e.lineno + ": " + e.message);
+   if (e != null && e != undefined) {
+     err("pthread sent an error! " + e.filename + ":" + e.lineno + ": " + e.message);
+   }
   };
   if (ENVIRONMENT_IS_NODE) {
    worker.on("message", function(data) {
