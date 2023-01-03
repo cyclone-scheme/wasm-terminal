@@ -1472,16 +1472,16 @@ var tempDouble;
 var tempI64;
 
 var ASM_CONSTS = {
- 88448: function($0) {
+ 88688: function($0) {
   helpLink(UTF8ToString($0));
  },
- 88480: function() {
+ 88720: function() {
   readyForNextCommand();
  },
- 88503: function() {
+ 88743: function() {
   throw "Canceled!";
  },
- 88521: function($0, $1) {
+ 88761: function($0, $1) {
   setTimeout(function() {
    __emscripten_do_dispatch_to_thread($0, $1);
   }, 0);
@@ -5921,9 +5921,9 @@ var _emscripten_get_sbrk_ptr = Module["_emscripten_get_sbrk_ptr"] = createExport
 
 var dynCall_jiji = Module["dynCall_jiji"] = createExportWrapper("dynCall_jiji");
 
-var __emscripten_allow_main_runtime_queued_calls = Module["__emscripten_allow_main_runtime_queued_calls"] = 88440;
+var __emscripten_allow_main_runtime_queued_calls = Module["__emscripten_allow_main_runtime_queued_calls"] = 88680;
 
-var __emscripten_main_thread_futex = Module["__emscripten_main_thread_futex"] = 96500;
+var __emscripten_main_thread_futex = Module["__emscripten_main_thread_futex"] = 96772;
 
 function invoke_viiii(index, a1, a2, a3, a4) {
  var sp = stackSave();
