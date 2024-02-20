@@ -1472,16 +1472,16 @@ var tempDouble;
 var tempI64;
 
 var ASM_CONSTS = {
- 88688: function($0) {
+ 89312: function($0) {
   helpLink(UTF8ToString($0));
  },
- 88720: function() {
+ 89344: function() {
   readyForNextCommand();
  },
- 88743: function() {
+ 89367: function() {
   throw "Canceled!";
  },
- 88761: function($0, $1) {
+ 89385: function($0, $1) {
   setTimeout(function() {
    __emscripten_do_dispatch_to_thread($0, $1);
   }, 0);
@@ -1887,9 +1887,7 @@ var PThread = {
    PThread.currentProxiedOperationCallerThread = undefined;
   };
   worker.onerror = function(e) {
-   if (e != null && e != undefined && e.message != undefined) {
-     err("pthread sent an error! " + e.filename + ":" + e.lineno + ": " + e.message);
-   }
+   err("pthread sent an error! " + e.filename + ":" + e.lineno + ": " + e.message);
   };
   if (ENVIRONMENT_IS_NODE) {
    worker.on("message", function(data) {
@@ -5921,9 +5919,9 @@ var _emscripten_get_sbrk_ptr = Module["_emscripten_get_sbrk_ptr"] = createExport
 
 var dynCall_jiji = Module["dynCall_jiji"] = createExportWrapper("dynCall_jiji");
 
-var __emscripten_allow_main_runtime_queued_calls = Module["__emscripten_allow_main_runtime_queued_calls"] = 88680;
+var __emscripten_allow_main_runtime_queued_calls = Module["__emscripten_allow_main_runtime_queued_calls"] = 89304;
 
-var __emscripten_main_thread_futex = Module["__emscripten_main_thread_futex"] = 96772;
+var __emscripten_main_thread_futex = Module["__emscripten_main_thread_futex"] = 97412;
 
 function invoke_viiii(index, a1, a2, a3, a4) {
  var sp = stackSave();
